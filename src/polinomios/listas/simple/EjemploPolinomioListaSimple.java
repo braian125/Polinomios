@@ -20,7 +20,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package polinomios.vectores.forma2;
+package polinomios.listas.simple;
 
 import polinomios.util.Termino;
 
@@ -28,36 +28,30 @@ import polinomios.util.Termino;
  *
  * @author alejandroescobar
  */
-public class EjemploForma2 {
+public class EjemploPolinomioListaSimple {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        //5x5 + 3x3 - 12x + 1
-        Termino[] terminosPolinomioA = new Termino[4];
-        terminosPolinomioA[0] = new Termino(5, 5);
-        terminosPolinomioA[1] = new Termino(3, 3);
-        terminosPolinomioA[2] = new Termino(1, -12);
-        terminosPolinomioA[3] = new Termino(0, 1);
+        PolinomioListaSimpleConCabeza pA = new PolinomioListaSimpleConCabeza();
+        Termino t = new Termino(10, 5);
+        Nodo n = new Nodo(t);
+        Nodo cA = pA.getCabeza();
+        cA.setLiga(n);
+        cA = n;
 
-        // 8x9 - 3x3 + 6x2 + 2
-        Termino[] terminosPolinomioB = new Termino[4];
-        terminosPolinomioB[0] = new Termino(9, 8);
-        terminosPolinomioB[1] = new Termino(3, -3);
-        terminosPolinomioB[2] = new Termino(2, 6);
-        terminosPolinomioB[3] = new Termino(0, -20);
+        t = new Termino(0, 20);
+        n = new Nodo(t);
+        cA.setLiga(n);
 
-        PolinomioVectorForma2 polA = new PolinomioVectorForma2(terminosPolinomioA);
-        System.out.println(polA);
+        PolinomioListaSimpleConCabeza pB = pA;
 
-        PolinomioVectorForma2 polB = new PolinomioVectorForma2(terminosPolinomioB);
-        System.out.println(polB);
-        
-        PolinomioVectorForma2 polC = polA.sumar(polB);
-        System.out.println(polC);
-        
-        System.out.println("Coeficiente de exponente 2 " + polC.getCoeficiente(2));
+        PolinomioListaSimpleConCabeza pC = pA.sumar(pB);
+
+        System.out.println(pA);
+        System.out.println(pB);
+        System.out.println(pC);
+
+        System.out.println("Coeficiente con exponente 2 " + pC.getCoeficiente(2));
+        System.out.println("Coeficiente con exponente 0 " + pC.getCoeficiente(0));
 
     }
 

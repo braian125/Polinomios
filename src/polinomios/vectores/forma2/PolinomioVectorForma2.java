@@ -41,6 +41,10 @@ public class PolinomioVectorForma2 {
         this.terminos = terminos;
     }
 
+    public PolinomioVectorForma2() {
+        terminos = null;
+    }
+
     /**
      * Obtener el grado del polinomio
      *
@@ -50,10 +54,22 @@ public class PolinomioVectorForma2 {
         return terminos[0].getE();
     }
 
-    public String mostrar() {
+    @Override
+    public String toString() {
         StringBuilder polinomio = new StringBuilder();
+        boolean primerTermino = true;
+        if (terminos == null) {
+            return "0";
+        }
         for (Termino ti : terminos) {
-            polinomio.append(ti.getC()).append("X^").append(ti.getE()).append(" ");
+            double j = ti.getC();
+            int i = ti.getE();
+            // Para adicionar el simbolo del coeficiente para numeros positivos, excluyendo el simbolo + del primer termino si es positivo.
+            if (j >= 0) {
+                polinomio.append("+");
+            }
+            polinomio.append(j).append("X^").append(i).append(" ");
+
         }
         return polinomio.toString();
     }
@@ -104,7 +120,7 @@ public class PolinomioVectorForma2 {
             int eA = terminosPolA[iA].getE();
             double cA = terminosPolA[iA].getC();
             int eB = terminosPolB[iB].getE();
-            double cB = terminosPolB[iA].getC();
+            double cB = terminosPolB[iB].getC();
 
             if (eA > eB) { //Traslado datos del Termino de A.
                 terminosPolC[iC] = new Termino(eA, cA);
@@ -139,7 +155,7 @@ public class PolinomioVectorForma2 {
         while (iB < ctB) {
             // Variables para los datos del termino en B
             int eB = terminosPolB[iB].getE();
-            double cB = terminosPolB[iA].getC();
+            double cB = terminosPolB[iB].getC();
             terminosPolC[iC] = new Termino(eB, cB);
             iB++;
             iC++;
@@ -153,17 +169,43 @@ public class PolinomioVectorForma2 {
             if (iC < terminosPolC.length) {
                 Termino[] terminosCTemporal = new Termino[iC];
 
-                // Una opción es copiar registro a registro 
-                // for (int i = 0; i < iC; i++) { 
-                //  terminosCTemporal[i] = terminosPolC[i]; 
-                // }
-                
                 System.arraycopy(terminosPolC, 0, terminosCTemporal, 0, iC);
                 polC = new PolinomioVectorForma2(terminosCTemporal);
                 return polC;
             }
         }
         return polC;
+    }
+
+    public PolinomioVectorForma2 sumar(double c, int e) {
+
+        Termino termino = new Termino(e, c);
+        Termino[] terminosC = new Termino[1];
+        terminosC[0] = termino;
+        PolinomioVectorForma2 polC = new PolinomioVectorForma2(terminosC);
+
+        if (this.terminos == null) {
+            return polC;
+        } else {
+            return this.sumar(polC);
+        }
+
+    }
+
+    /**
+     * Obtiene el coeficiente de un termino dado un exponente
+     *
+     * @param exponente
+     * @return
+     */
+    public double getCoeficiente(int exponente) {
+        double coeficiente = 0;
+        for (Termino t : terminos) {
+            if (t.getE() == exponente) {
+                return t.getC();
+            }
+        }
+        return coeficiente;
     }
 
 }

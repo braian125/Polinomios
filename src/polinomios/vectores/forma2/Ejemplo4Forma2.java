@@ -22,43 +22,33 @@
  */
 package polinomios.vectores.forma2;
 
-import polinomios.util.Termino;
-
 /**
  *
  * @author alejandroescobar
  */
-public class EjemploForma2 {
+public class Ejemplo4Forma2 {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.Exception
      */
-    public static void main(String[] args) {
-        //5x5 + 3x3 - 12x + 1
-        Termino[] terminosPolinomioA = new Termino[4];
-        terminosPolinomioA[0] = new Termino(5, 5);
-        terminosPolinomioA[1] = new Termino(3, 3);
-        terminosPolinomioA[2] = new Termino(1, -12);
-        terminosPolinomioA[3] = new Termino(0, 1);
+    public static void main(String[] args) throws Exception {
 
-        // 8x9 - 3x3 + 6x2 + 2
-        Termino[] terminosPolinomioB = new Termino[4];
-        terminosPolinomioB[0] = new Termino(9, 8);
-        terminosPolinomioB[1] = new Termino(3, -3);
-        terminosPolinomioB[2] = new Termino(2, 6);
-        terminosPolinomioB[3] = new Termino(0, -20);
+        PolinomioVectorForma2 polA = new PolinomioVectorForma2();
 
-        PolinomioVectorForma2 polA = new PolinomioVectorForma2(terminosPolinomioA);
+        polA = polA.sumar(4, 2);
+
+        polA = polA.sumar(100, 200);
+
+        polA = polA.sumar(98, 1000);
+
+        polA = polA.sumar(4, 2);
+
+        polA = polA.sumar(4, 2);
+
+        polA = polA.sumar(4, 2);
+
         System.out.println(polA);
-
-        PolinomioVectorForma2 polB = new PolinomioVectorForma2(terminosPolinomioB);
-        System.out.println(polB);
-        
-        PolinomioVectorForma2 polC = polA.sumar(polB);
-        System.out.println(polC);
-        
-        System.out.println("Coeficiente de exponente 2 " + polC.getCoeficiente(2));
-
     }
 
 }

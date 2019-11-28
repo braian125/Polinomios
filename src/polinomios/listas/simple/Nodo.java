@@ -25,7 +25,7 @@ package polinomios.listas.simple;
 import polinomios.util.Termino;
 
 /**
- *
+ * Clase que representa un nodo simple en una lista ligada
  * @author alejandroescobar
  */
 class Nodo {
